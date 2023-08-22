@@ -69,12 +69,10 @@ Supporting a unique origin, fixes both of these limitations and will enable more
 
 Compared to that proposal, this doc proposes a more generic solution for creating unique origins that can be used for more than just Blob URLs. This makes it easier to use this feature to refactor existing web applications. 
 
-However, there are a few downsides to this proposal:
+However, there is a downside to this proposal:
 
 1. It does not fully address XSS issues stemming from Blob URLs. SVG use elements could point to a same-origin sandboxed Blob URL and thus lead to unsandboxed code execution. 
     * This seems acceptable since this is a very rarely used feature. 
-2. It does not provide a way to create a secure `postMessage` channel with an iframe that has a unique origin. This is because attackers can swap out child iframes on any page that doesn't enforce both COOP and XFO/`frame-ancestors`. 
-    * This is a significant downside but there are workarounds (namely using a secret key passed into the iframe to establish the channel). In addition, in the long term there is hope that it may be possible to further restrict cross-origin frame src changes. 
 
 ### The format of cross-origin Blob URLs look weird. Why did you choose that?
 
