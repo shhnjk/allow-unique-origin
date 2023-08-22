@@ -4,9 +4,9 @@ A Web Platform API proposal to improve sandboxing and Blob URL
 
 David Dworken and Jun Kokatsu, Aug 2023 (©2023, Google)
 
-## TL;DR: Add a `allow-unique-origin` sandbox directive and response headers to Blob URLs
+## TL;DR: Add a `allow-unique-origin` sandbox keyword and response headers to Blob URLs
 
-### `allow-unique-origin` sandbox directive
+### `allow-unique-origin` sandbox keyword
 
 Add a new [sandbox](https://html.spec.whatwg.org/multipage/browsers.html#sandboxing) keyword, `allow-unique-origin`, that causes the rendered content to execute in a unique non-`null` origin. 
 
@@ -34,7 +34,7 @@ window.open(safeBlobUrl);
 
 In this case, `safeBlobUrl` is guaranteed to render in a unique origin no matter how it is used, and thus it cannot lead to an XSS vulnerability in the creating application.
 
-When a Blob sets a CSP policy that includes the `sandbox` directive, it does not inherit the CSP of the creator. This matches the web's model where loading an iframe with a distinct origin also does not inherit the CSP of the parent page. 
+When a Blob sets a CSP policy that includes the `allow-unique-origin` sandbox keyword, it does not inherit the CSP of the creator. This matches the web's model where loading an iframe with a distinct origin also does not inherit the CSP of the parent page. 
 
 ## Why do we need this?
 
