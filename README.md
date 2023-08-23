@@ -12,7 +12,9 @@ Add a new [sandbox](https://html.spec.whatwg.org/multipage/browsers.html#sandbox
 
 The origin of a document sandboxed in this way will be `sandbox:["$RANDOM_UUID","$PRECURSOR_ORIGIN"]`. For example, if `https://example.com` set a `CSP: sandbox allow-unique-origin` header, then the origin of the document would be `sandbox:["9138ee47-c4f7-4e30-8751-acf51834e3f6","https://example.com"]`. Having a unique origin that contains the precursor origin, makes it possible to implement a number of useful product features like checking the precursor origin when responding to CORS requests.
 
-These sandboxed pages will have access to isolated new storage partitions with a lifetime scoped to the current page. This includes `document.cookie`, `window.localStorage`, `window.caches`, and more. 
+These sandboxed pages will have access to isolated new storage partitions with a lifetime scoped to the current page. This includes `document.cookie`, `window.localStorage`, `window.caches`, and more.
+
+Since unique-origin documents are considered cross-origin (and cross-site) from the precursor origin (and any other origins), it should be process-isolated whenever possible by User Agents.
 
 ### Blob URL Response Headers
 
