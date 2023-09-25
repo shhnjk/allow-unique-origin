@@ -76,13 +76,13 @@ However, there is a downside to this proposal:
 1. It does not fully address XSS issues stemming from Blob URLs. SVG use elements could point to a same-origin sandboxed Blob URL and thus lead to unsandboxed code execution. 
     * This seems acceptable since this is a very rarely used feature. 
 
-### The format of cross-origin Blob URLs look weird. Why did you choose that?
+### The format of unique origin look weird. Why did you choose that?
 
-Having origins like `sandbox:[$RANDOM_UUID][$ORIGINAL_ORIGIN]` make it possible for endpoints receiving CORS requests to ascertain both the original origin, and which unique origin a request is coming from. I'm not attached to this format, but I believe including this information is useful. 
+Having origins like `sandbox:["$RANDOM_UUID","$PRECURSOR_ORIGIN"]` make it possible for endpoints receiving CORS requests to ascertain both the original origin, and which unique origin a request is coming from. I'm not attached to this format, but I believe including this information is useful. 
 
-### Why is CSP not inherited from the creator to Sandboxed Blob URLs?
+### Why is CSP not inherited from the creator to unique origin Blob URLs?
 
-A creator of cross-origin Blob URLs is often a sensitive origin. And therefore it is likely to have a [strict CSP](https://csp.withgoogle.com/docs/strict-csp.html) to defend against XSS attacks.
+A creator of unique origin Blob URLs is often a sensitive origin. And therefore it is likely to have a [strict CSP](https://csp.withgoogle.com/docs/strict-csp.html) to defend against XSS attacks.
 However, the creator likely is using a sandboxed Blob URL in order to safely run arbitrary HTML/JS (because it acts like a sandbox domain), which is not possible if CSP is automatically inherited.
 
 Conceptually, this isn't a CSP bypass since it is treating sandboxed Blob URLs identically to cross-origin iframes. 
